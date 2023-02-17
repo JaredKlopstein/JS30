@@ -4,10 +4,25 @@
   <meta charset="UTF-8">
   <title>Key Detection</title>
   <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+  <script type="text/javascript" src="https://www.iamcal.com/sharkify/sharkify.js"></script>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
 <body>
 <script>
+
+  const pressed = [];
+  const secretCode = 'jared';
+
+  window.addEventListener('keyup',(e) => {
+    pressed.push(e.key);
+
+    pressed.splice(-secretCode.length - 1,pressed.length - secretCode.length);
+    if(pressed.join('').includes(secretCode)) {
+      window.alert('You pressed the secret combo!')
+      cornify_add();
+      sharkify_add();
+    }
+  });
 </script>
 </body>
 </html>
