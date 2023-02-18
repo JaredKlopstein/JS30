@@ -44,6 +44,7 @@
   </div>
 
   <script>
+    // used to run the checkslide function intermediately as to not cause overloading
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -58,6 +59,27 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach(sliderImage => {
+        // marks halfway through image
+        const slideInAt = (window.scrollY + window.innerHeight) - 
+        sliderImage.height / 2;
+        // marks the bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        // calculates if image is halfway in view
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+        // calculates if scrolled past
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        // tern op to add or remove active class from sliderImage based on variables above
+        (isHalfShown && isNotScrolledPast) ? sliderImage.classList.add('active') : sliderImage.classList.remove('active')
+        
+      })
+    }
+
+    window.addEventListener('scroll',debounce(checkSlide))
 
   </script>
 
