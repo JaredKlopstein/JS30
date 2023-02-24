@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sort Without Articles</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      #bands {
+        list-style: inside square;
+        font-size: 20px;
+        background: white;
+        width: 500px;
+        margin: auto;
+        padding: 0;
+        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #bands li {
+        border-bottom: 1px solid #efefef;
+        padding: 20px;
+      }
+
+      #bands li:last-child {
+        border-bottom: 0;
+      }
+
+      a {
+        color: #ffc600;
+        text-decoration: none;
+      }
+    </style>
+
+    <ul id="bands"></ul>
+
+    <script>
+      const bands = [
+        "The Plot in You",
+        "The Devil Wears Prada",
+        "Pierce the Veil",
+        "Norma Jean",
+        "The Bled",
+        "Say Anything",
+        "The Midway State",
+        "We Came as Romans",
+        "Counterparts",
+        "Oh, Sleeper",
+        "A Skylit Drive",
+        "Anywhere But Here",
+        "An Old Dog",
+      ];
+
+      // sort the bands
+      //this function takes the band name and replaces any a/an/the with nothing to be sorted correctly
+      function strip(bandName) {
+        return bandName.replace(/^(a |the |an )/i, '').trim()
+      }
+      //this takes the band name and sorts 
+      const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+
+      // create li for each band
+      // this uses map to return an "li" item for each band and then joins together so no comma appears and is one long html string
+      const html = sortedBands
+        .map((band) => {
+          return `
+      <li>
+      ${band}
+      </li>
+    `;
+        })
+        .join("");
+
+      // put li inside of the ul
+      // this is a selector for the list to be filled
+      const list = document.querySelector("#bands");
+      // this sets the list to html which we created above
+      list.innerHTML = html;
+    </script>
+  </body>
+</html>
