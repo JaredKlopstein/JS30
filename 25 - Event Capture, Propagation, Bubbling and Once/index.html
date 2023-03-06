@@ -40,10 +40,28 @@
     background: coral;
   }
 </style>
-
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
 
+  function logText(e) {
+    e.stopPropagation(); // stops bubbling
+    console.log(this.classList.value);
+  }
+
+document.body.addEventListener('click', logText)
+  
+divs.forEach(div => div.addEventListener('click',logText, {
+  capture: false, // true will result in one being clicked with stop prop due to going down, stops at one
+  once: true //removes addevent listener after
+}))
+
+button.addEventListener('click',() => {
+console.log('clicked!')
+},{
+  once: true
+})
 </script>
 </body>
 </html>
